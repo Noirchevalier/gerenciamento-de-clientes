@@ -1,0 +1,17 @@
+# Binários
+bin/
+main
+api
+
+# Dependências
+vendor/
+
+# IDEs
+.vscode/
+.idea/
+
+# Docker data
+postgres_data/
+
+# Go env
+go.sum
