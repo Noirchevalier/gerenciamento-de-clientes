@@ -1,6 +1,3 @@
-Aqui está o conteúdo completo e formatado do seu README.md. É só copiar o bloco abaixo e substituir todo o conteúdo do seu arquivo atual:
-
-Markdown
 # 🧑‍💼 Gerenciamento de Clientes (Backend Go)
 
 Sistema de gerenciamento de clientes desenvolvido em **Go**, utilizando **Docker** para infraestrutura e seguindo os princípios de **DDD (Domain Driven Design)**.
@@ -77,13 +74,9 @@ Servidor Online
 Utilize as seguintes configurações para conectar ao Postgres:
 
 Host: localhost
-
 Porta: 5432
-
 Database: orders_db
-
 Usuário: user
-
 Senha: password123
 
 📂 Estrutura do Projeto (DDD)
