@@ -1,7 +1,5 @@
 # Binários
 bin/
-main
-api
 
 # Dependências
 vendor/
