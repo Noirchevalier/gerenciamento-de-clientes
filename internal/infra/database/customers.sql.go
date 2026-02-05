@@ -13,8 +13,8 @@ import (
 )
 
 const createCustomer = `-- name: CreateCustomer :one
-INSERT INTO customers (id, name, email, created_at)
-VALUES ($1, $2, $3, $4)
+INSERT INTO customers (id, name, email, document, created_at, updated_at)
+VALUES ($1, $2, $3, $4, $5, $6)
 RETURNING id
 `
 
@@ -22,7 +22,9 @@ type CreateCustomerParams struct {
 	ID        uuid.UUID `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
+	Document  string    `json:"document"`
 	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (q *Queries) CreateCustomer(ctx context.Context, arg CreateCustomerParams) (uuid.UUID, error) {
@@ -30,7 +32,9 @@ func (q *Queries) CreateCustomer(ctx context.Context, arg CreateCustomerParams) 
 		arg.ID,
 		arg.Name,
 		arg.Email,
+		arg.Document,
 		arg.CreatedAt,
+		arg.UpdatedAt,
 	)
 	var id uuid.UUID
 	err := row.Scan(&id)
@@ -38,7 +42,7 @@ func (q *Queries) CreateCustomer(ctx context.Context, arg CreateCustomerParams) 
 }
 
 const getCustomer = `-- name: GetCustomer :one
-SELECT id, name, email, created_at FROM customers
+SELECT id, name, email, document, created_at, updated_at FROM customers
 WHERE id = $1
 LIMIT 1
 `
@@ -50,13 +54,15 @@ func (q *Queries) GetCustomer(ctx context.Context, id uuid.UUID) (Customer, erro
 		&i.ID,
 		&i.Name,
 		&i.Email,
+		&i.Document,
 		&i.CreatedAt,
+		&i.UpdatedAt,
 	)
 	return i, err
 }
 
 const listCustomers = `-- name: ListCustomers :many
-SELECT id, name, email, created_at FROM customers
+SELECT id, name, email, document, created_at, updated_at FROM customers
 ORDER BY name
 `
 
@@ -73,7 +79,9 @@ func (q *Queries) ListCustomers(ctx context.Context) ([]Customer, error) {
 			&i.ID,
 			&i.Name,
 			&i.Email,
+			&i.Document,
 			&i.CreatedAt,
+			&i.UpdatedAt,
 		); err != nil {
 			return nil, err
 		}

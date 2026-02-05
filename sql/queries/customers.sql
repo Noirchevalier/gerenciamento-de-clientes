@@ -1,6 +1,6 @@
 -- name: CreateCustomer :one
-INSERT INTO customers (id, name, email, created_at)
-VALUES (@id, @name, @email, @created_at)
+INSERT INTO customers (id, name, email, document, created_at, updated_at)
+VALUES (@id, @name, @email, @document, @created_at, @updated_at)
 RETURNING id;
 
 -- name: GetCustomer :one
